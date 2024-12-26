@@ -12,11 +12,12 @@ def get_mask_account(account_number: str) -> str:
         return f"**{account_number[-4:]}"
     elif "Счет" in account_number:
         return f"Счет **{account_number[-4:]}"
+    else:
+        return ""
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     card_number_input = input("Введите карту: ")
     print(get_mask_card_number(card_number_input))
     account_number_input = input("Введите счет: ")
     print(get_mask_account(account_number_input))
-

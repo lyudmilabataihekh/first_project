@@ -1,5 +1,6 @@
-from src.masks import get_mask_account, get_mask_card_number
 import re
+
+from src.masks import get_mask_account, get_mask_card_number
 
 
 def mask_account_card(account_card_data: str) -> str:
@@ -24,7 +25,7 @@ def get_date(date: str) -> str:
     return modified_format
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     account_card_data_input = input("Введите тип и номер карты или счета: ")
     print(mask_account_card(account_card_data_input))
     date_input = input("Введите дату: ")
