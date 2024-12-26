@@ -15,7 +15,8 @@ def get_mask_account(account_number: str) -> str:
 
 
 if __name__ == '__main__':
-    input_card_number = input("Введите карту: ")
-    print(get_mask_card_number(input_card_number))
-    input_account_number = input("Введите счет: ")
-    print(get_mask_account(input_account_number))
+    card_number_input = input("Введите карту: ")
+    print(get_mask_card_number(card_number_input))
+    account_number_input = input("Введите счет: ")
+    print(get_mask_account(account_number_input))
+
