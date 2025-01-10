@@ -19,6 +19,13 @@ def filter_by_state(data: List[Dict[str, str]], state: str ='EXECUTED') -> List[
     return filtered_items
 
 
+def sort_by_date(data: List[Dict[str, str]], sorting: bool =True) -> List[Dict[str, str]]:
+    """Принимает список словарей с необязательным параметром
+    и возвращает новый список, отсортированный по дате"""
+    sorted_data = sorted(data, key=lambda x: x['date'], reverse=sorting)
+    return sorted_data
+
+
 if __name__ == "__main__":
     # Выход функции со статусом по умолчанию 'EXECUTED'
     executed_items = filter_by_state(data)
@@ -27,3 +34,6 @@ if __name__ == "__main__":
     # Выход функции, если вторым аргументом передано 'CANCELED'
     canceled_items = filter_by_state(data, state="CANCELED")
     print(canceled_items)
+
+    # Выход функции (сортировка по убыванию, т. е. сначала самые последние операции)
+    print(sort_by_date(data))
