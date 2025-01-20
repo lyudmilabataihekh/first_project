@@ -1,19 +1,24 @@
+import re
+
+
 def get_mask_card_number(card: str) -> str:
     """Маскирует номер банковской карты"""
-    if card.isdigit():
-        return f"{card[:4]} {card[4:6]}** **** {card[-4:]}"
+    card = re.sub(r"[-.\/ ]", "", card)
+    if len(card) != 16 or not card.isdigit():
+        return ""
     else:
-        return f"{card[:-12]} {card[-12:-10]}** **** {card[-4:]}"
+        return f"{card[:4]} {card[4:6]}** **** {card[-4:]}"
 
 
 def get_mask_account(account_number: str) -> str:
     """Маскирует номер банковского счета"""
-    if account_number.isdigit():
-        return f"**{account_number[-4:]}"
+    account_number = re.sub(r"[-.\/ ]", "", account_number)
+    if len(account_number) != 16 or not account_number.isdigit():
+        return ""
     elif "Счет" in account_number:
         return f"Счет **{account_number[-4:]}"
     else:
-        return ""
+        return f"**{account_number[-4:]}"
 
 
 if __name__ == "__main__":
