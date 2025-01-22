@@ -13,10 +13,10 @@ def get_mask_card_number(card: str) -> str:
 def get_mask_account(account_number: str) -> str:
     """Маскирует номер банковского счета"""
     account_number = re.sub(r"[-.\/ ]", "", account_number)
-    if len(account_number) != 16 or not account_number.isdigit():
-        return ""
-    elif "Счет" in account_number:
+    if "Счет" in account_number:
         return f"Счет **{account_number[-4:]}"
+    elif len(account_number) != 16 or not account_number.isdigit():
+        return ""
     else:
         return f"**{account_number[-4:]}"
 

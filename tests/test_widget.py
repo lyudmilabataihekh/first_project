@@ -21,7 +21,7 @@ from src.widget import get_date, mask_account_card
         ("1234 5678 9012 abcd", ""),
     ],
 )
-def test_mast_account_card(input_data: str, expected_output: str) -> None:
+def test_mask_account_card(input_data: str, expected_output: str) -> None:
     assert mask_account_card(input_data) == expected_output
 
 
