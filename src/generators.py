@@ -3,15 +3,17 @@ from typing import Any, Dict, Generator, List
 
 def filter_by_currency(transactions: List[Dict[str, Any]], currency: str) -> Generator[Dict[str, Any], None, None]:
     """Поочередно выдает транзакции, где валюта операции соответствует заданной"""
+    currency = currency.upper()
     for transaction in transactions:
-        if transaction["operationAmount"]["currency"]["code"] == currency:
+        if transaction["operationAmount"]["currency"]["code"].upper() == currency:
             yield transaction
 
 
 def transaction_descriptions(descriptions: List[Dict[str, Any]]) -> Generator[str, None, None]:
     """Возвращает описание каждой операции по очереди"""
     for description in descriptions:
-        yield description["description"]
+        if description["description"] != "":
+            yield description["description"]
 
 
 def card_number_generator(start: int, end: int) -> Generator[str, None, None]:
