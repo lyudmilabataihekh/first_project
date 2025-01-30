@@ -12,7 +12,7 @@ def filter_by_currency(transactions: List[Dict[str, Any]], currency: str) -> Gen
 def transaction_descriptions(descriptions: List[Dict[str, Any]]) -> Generator[str, None, None]:
     """Возвращает описание каждой операции по очереди"""
     for description in descriptions:
-        if description["description"] != "":
+        if description["description"]:
             yield description["description"]
 
 
