@@ -21,8 +21,11 @@ def get_date(date: str) -> str:
     month = formated_date[4:6]
     day = formated_date[6:8]
 
-    modified_format = f"{day}.{month}.{year}"
-    return modified_format
+    if len(formated_date) != 8 or not formated_date.isdigit():
+        return ""
+    else:
+        modified_format = f"{day}.{month}.{year}"
+        return modified_format
 
 
 if __name__ == "__main__":
