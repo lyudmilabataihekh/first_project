@@ -8,12 +8,13 @@ def log(filename: Optional[str] = None) -> Callable[[Callable[[Any, Any], Any]],
         @wraps(func)
         def wrapper(*args: Any, **kwargs: Any) -> Any:
             try:
+
                 print(f"Starting function: {func.__name__}")
                 result = func(*args, **kwargs)
                 log_message = f"{func.__name__} ok: {result}"
                 print(log_message)
 
-                if filename:
+                if filename: # Если указан файл, логи записываются в него
                     with open(filename, "a") as file:
                         file.write(log_message + "\n")
                 return result
