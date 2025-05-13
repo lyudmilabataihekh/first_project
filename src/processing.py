@@ -1,19 +1,20 @@
-from typing import Dict, List, Any
+from datetime import datetime
+from typing import Any, Dict, List
 
 data = [
-    {'id': 41428829, 'state': 'EXECUTED', 'date': '2019-07-03T18:35:29.512364'},
-    {'id': 939719570, 'state': 'EXECUTED', 'date': '2018-06-30T02:08:58.425572'},
-    {'id': 594226727, 'state': 'CANCELED', 'date': '2018-09-12T21:27:25.241689'},
-    {'id': 615064591, 'state': 'CANCELED', 'date': '2018-10-14T08:21:33.419441'}
+    {"id": 41428829, "state": "EXECUTED", "date": "2019-07-03T18:35:29.512364"},
+    {"id": 939719570, "state": "EXECUTED", "date": "2018-06-30T02:08:58.425572"},
+    {"id": 594226727, "state": "CANCELED", "date": "2018-09-12T21:27:25.241689"},
+    {"id": 615064591, "state": "CANCELED", "date": "2018-10-14T08:21:33.419441"},
 ]
 
 
-def filter_by_state(data: List[Dict[str, Any]], state: str = 'EXECUTED') -> List[Dict[str, Any]]:
+def filter_by_state(data: List[Dict[str, Any]], state: str = "EXECUTED") -> List[Dict[str, Any]]:
     """Принимает список словарей, опциональное значение для ключа state
-        и возвращает новый список с указанным значением"""
+    и возвращает новый список с указанным значением"""
     filtered_items = []
     for item in data:
-        if item.get('state') == state:
+        if item.get("state") == state:
             filtered_items.append(item)
     return filtered_items
 
@@ -21,7 +22,15 @@ def filter_by_state(data: List[Dict[str, Any]], state: str = 'EXECUTED') -> List
 def sort_by_date(data: List[Dict[str, Any]], sorting: bool = True) -> List[Dict[str, Any]]:
     """Принимает список словарей с необязательным параметром
     и возвращает новый список, отсортированный по дате"""
-    sorted_data = sorted(data, key=lambda x: x['date'], reverse=sorting)
+
+    def modify_value(value: str) -> datetime:
+        """Проверяет, соответствует ли значение дате"""
+        try:
+            return datetime.fromisoformat(value)
+        except ValueError:
+            raise ValueError("Некорректный формат даты")
+
+    sorted_data = sorted(data, key=lambda x: modify_value(x["date"]), reverse=sorting)
     return sorted_data
 
 
